@@ -156,6 +156,13 @@ psql sequelize_development
 SELECT * FROM users;
 ```
 
+Don't forget to create a .gitignore file `touch .gitignore`!
+
+```sh
+/node_modules
+.DS_Store
+```
+
 ## Resources
 
 - https://sequelize.org/master/manual/migrations.html
