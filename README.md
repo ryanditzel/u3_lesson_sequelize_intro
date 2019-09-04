@@ -152,7 +152,7 @@ npx sequelize-cli db:seed:all
 Drop into psql and query the database for the demo user:
 
 ```sh
-psql database_development
+psql sequelize_development
 SELECT * FROM users;
 ```
 
