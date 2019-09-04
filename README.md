@@ -29,7 +29,7 @@ sequelize/config/config.json
 "development": {
     "username": "<your_username>",
     "password": null,
-    "database": "database_development",
+    "database": "sequelize_development",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false
