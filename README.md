@@ -27,8 +27,6 @@ Let's configure our Sequelize project to work with Postgres:
 sequelize/config/config.json
 ```js
 "development": {
-    "username": "<your_username>",
-    "password": null,
     "database": "sequelize_development",
     "host": "127.0.0.1",
     "dialect": "postgres",
@@ -45,7 +43,7 @@ npx sequelize-cli db:create
 Next we will create a User model:
 
 ```sh
-npx sequelize-cli model:generate --name user --attributes firstName:string,lastName:string,email:string
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
 ```
 
 Below is the User model and an associated migration that will be created from the above command: 
@@ -55,7 +53,7 @@ sequelize/models/user.js
 ```js
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('user', {
+  const User = sequelize.define('User', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING
@@ -73,7 +71,7 @@ sequelize/migrations/20190904165246-User.js
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('User', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -100,7 +98,7 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('User');
   }
 };
 ```
@@ -126,7 +124,7 @@ Let's edit the file sequelize/seeders/20190904165805-demo-user.js
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('users', [{
+    return queryInterface.bulkInsert('Users', [{
         firstName: 'John',
         lastName: 'Doe',
         email: 'demo@demo.com',
@@ -136,7 +134,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('users', null, {});
+    return queryInterface.bulkDelete('Users', null, {});
   }
 };
 ```
@@ -153,7 +151,7 @@ Drop into psql and query the database for the demo user:
 
 ```sh
 psql sequelize_development
-SELECT * FROM users;
+SELECT * FROM "Users";
 ```
 
 Don't forget to create a .gitignore file `touch .gitignore`!
