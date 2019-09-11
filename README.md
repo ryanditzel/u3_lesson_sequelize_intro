@@ -21,6 +21,7 @@ Next we will initialize a Sequelize project:
 ```sh
 npx sequelize-cli init
 ```
+> Let's get familiar with all the commands available to us: `npx sequelize-cli --help`
 
 Let's configure our Sequelize project to work with Postgres:
 
