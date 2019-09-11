@@ -14,7 +14,7 @@ Sequelize is a JavaScript Object Relational Mapping tool! Its an abstraction lay
 
 ##
 
-Great, but how do we use it? Let's start by installing the [Sequelize Client](https://github.com/sequelize/cli):
+Great, but how do we use Sequelize? Let's start by installing the [Sequelize Client](https://github.com/sequelize/cli):
 
 ```sh
 cd sequelize
