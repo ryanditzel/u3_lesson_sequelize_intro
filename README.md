@@ -2,18 +2,10 @@
 
 # Sequelize
 
-### Getting started
-
-1. Fork
-1. Clone
-
 ### Learning Objectives
 
  - Describe what an ORM is and why we would use one
  - Model a database using an ORM
- - Create a Sequelize model of a database table
- - Insert data with model methods
- - Target a specific record in a database using Sequelize model methods and operators
 
 ### Prior to this Lesson
 _Students should already be able to..._
