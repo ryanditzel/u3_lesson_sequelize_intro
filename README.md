@@ -30,7 +30,8 @@ sequelize/config/config.json
     "database": "sequelize_development",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "underscored": true
   }
 ```
 
@@ -43,7 +44,7 @@ npx sequelize-cli db:create
 Next we will create a User model:
 
 ```sh
-npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+npx sequelize-cli model:generate --name User --attributes first_name:string,last_name:string,email:string --underscored
 ```
 
 Below is the User model and an associated migration that will be created from the above command: 
@@ -54,10 +55,12 @@ sequelize/models/user.js
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    first_name: DataTypes.STRING,
+    last_name: DataTypes.STRING,
     email: DataTypes.STRING
-  }, {});
+  }, {
+    underscored: true,
+  });
   User.associate = function(models) {
     // associations can be defined here
   };
@@ -78,20 +81,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
+      first_name: {
         type: Sequelize.STRING
       },
-      lastName: {
+      last_name: {
         type: Sequelize.STRING
       },
       email: {
         type: Sequelize.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
@@ -125,11 +128,11 @@ Let's edit the file sequelize/seeders/20190904165805-demo-user.js
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [{
-        firstName: 'John',
-        lastName: 'Doe',
+        first_name: 'John',
+        last_name: 'Doe',
         email: 'demo@demo.com',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        created_at: new Date(),
+        updated_at: new Date()
       }], {});
   },
 
