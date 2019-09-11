@@ -2,44 +2,7 @@
 
 # Sequelize
 
-### Learning Objectives
-
- - Describe what an ORM is and why we would use one
- - Model a database using an ORM
-
-### Prior to this Lesson
-_Students should already be able to..._
-
-- Create, read, update and delete from a database using SQL.
-- Use SQL syntax to define datatypes, perform joins and filtering.
-
-## Object Relational Mapping (ORM)
-
-We will store our information in databases, and we've seen that we can query databases with SQL commands. But how can we access a database from within a JavaScript application?
-
-An **Object Relational Mapping**, or **ORM**, bridges this gap for us. An ORM library like Sequelize offers an easy way to communicate with a database with familiar JavaScript syntax.
-
- [From the venerable wikipedia](https://en.wikipedia.org/wiki/Object-relational_mapping#Comparison_with_traditional_data_access_techniques)
-
-> Compared to traditional techniques of exchange between an object-oriented language and a relational database, ORM often reduces the amount of code that needs to be written.[2]
-
-> Disadvantages of ORM tools generally stem from the high level of abstraction obscuring what is actually happening in the implementation code. Also, heavy reliance on ORM software has been cited as a major factor in producing poorly designed databases.
-
-The core motivation for developing and using an ORM framework is the need to overcome the [impedance mismatch problem](https://en.wikipedia.org/wiki/Object-relational_impedance_mismatch)
-
-> The object-relational impedance mismatch is a set of conceptual and technical difficulties that are often encountered when a relational database management system (RDBMS) is being served by an application program (or multiple application programs) written in an object-oriented programming language or style, particularly because objects or class definitions must be mapped to database tables defined by a relational schema.
-
-In short, we want to be able to interact with a SQL database using an Object-Oriented programming paradigm, and an ORM framework provides a set of absrtactions and methods that allow developers to write code in this fashion.
-
-An additional touted benefit is that ORM frameworks isolate developers from the inner quirks of particular database implementations, but in practice this is often a secondary concern at most.  Generally, the ability to compose snippets of code and queries into more general operations and the seamless integration of information from the database into the native programming language structures are what justify the "magic" inherent in an ORM framework.
-
-## Basic Concepts and Queries
-
-One of the fundamental design choices of modern ORM's is to represent an individual row in a database as a single instantiated object (or structure) in the application programming language.  A table is represented as a class object or as a class.  Therefore, operations that are performed on a table, e.g., retrieving or inserting a particular row, are _class methods_, and operations that are performed on a single row, e.g., updating a column, are _instance methods_ on a particular object.
-
-## So what is Sequelize?
-
-"Sequelize is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more." - sequelize.org
+"[Sequelize](http://sequelizejs.com) is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more." - sequelize.org
 
 Sequelize is a JavaScript ORM!
 
