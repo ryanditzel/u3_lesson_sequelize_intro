@@ -21,7 +21,8 @@ _Students should already be able to..._
 - Create, read, update and delete from a database using SQL.
 - Use SQL syntax to define datatypes, perform joins and filtering.
 
-## What's going on here?
+## Object Relational Mapping (ORM)
+
 We will store our information in databases, and we've seen that we can query databases with SQL commands. But how can we access a database from within a JavaScript application?
 
 An **Object Relational Mapping**, or **ORM**, bridges this gap for us. An ORM library like Sequelize offers an easy way to communicate with a database with familiar JavaScript syntax.
@@ -44,11 +45,16 @@ An additional touted benefit is that ORM frameworks isolate developers from the 
 
 One of the fundamental design choices of modern ORM's is to represent an individual row in a database as a single instantiated object (or structure) in the application programming language.  A table is represented as a class object or as a class.  Therefore, operations that are performed on a table, e.g., retrieving or inserting a particular row, are _class methods_, and operations that are performed on a single row, e.g., updating a column, are _instance methods_ on a particular object.
 
-# What is Sequelize?
+## What is Sequelize?
 
 "Sequelize is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more." - sequelize.org
 
-Let's create a project and install the [Sequelize Client](https://github.com/sequelize/cli):
+Sequelize is a JavaScript ORM!
+
+
+### Let's create our first Sequelize project.
+
+First, install the [Sequelize Client](https://github.com/sequelize/cli):
 
 ```sh
 cd sequelize
