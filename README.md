@@ -28,10 +28,11 @@ npm install sequelize pg
 npm install --save-dev sequelize-cli
 ```
 
-Next we will initialize a Sequelize project:
+Next we will initialize a Sequelize project then open it in VS Code:
 
 ```sh
 npx sequelize-cli init
+code .
 ```
 > Let's get familiar with all the commands available to us: `npx sequelize-cli --help`
 
