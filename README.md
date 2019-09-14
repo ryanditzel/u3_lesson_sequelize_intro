@@ -24,7 +24,7 @@ Great, but how do we use Sequelize? Let's start by installing the [Sequelize Cli
 ```sh
 cd sequelize
 npm init -y
-npm install sequelize
+npm install sequelize pg
 npm install --save-dev sequelize-cli
 ```
 
