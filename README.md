@@ -42,9 +42,7 @@ sequelize/config/config.json
 "development": {
     "database": "sequelize_development",
     "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": false,
-    "underscored": true
+    "dialect": "postgres"
   }
 ```
 
@@ -57,7 +55,7 @@ npx sequelize-cli db:create
 Next we will create a User model:
 
 ```sh
-npx sequelize-cli model:generate --name User --attributes first_name:string,last_name:string,email:string --underscored
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string,password:string
 ```
 
 Below is the User model and an associated migration that will be created from the above command: 
@@ -68,12 +66,11 @@ sequelize/models/user.js
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING,
-    email: DataTypes.STRING
-  }, {
-    underscored: true,
-  });
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+  }, {});
   User.associate = function(models) {
     // associations can be defined here
   };
@@ -94,20 +91,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      first_name: {
+      firstName: {
         type: Sequelize.STRING
       },
-      last_name: {
+      lastName: {
         type: Sequelize.STRING
       },
       email: {
         type: Sequelize.STRING
       },
-      created_at: {
+      password: {
+        type: Sequelize.STRING
+      },
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }
@@ -130,10 +130,10 @@ npx sequelize-cli db:migrate
 Now let's create a seed file:
 
 ```sh
-npx sequelize-cli seed:generate --name demo-user
+npx sequelize-cli seed:generate --name user
 ```
 
-Let's edit the file sequelize/seeders/20190904165805-demo-user.js
+Let's edit the file sequelize/seeders/20190904165805-user.js
 
 ```js
 'use strict';
@@ -141,11 +141,12 @@ Let's edit the file sequelize/seeders/20190904165805-demo-user.js
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [{
-        first_name: 'John',
-        last_name: 'Doe',
+        firstName: 'John',
+        lastName: 'Doe',
         email: 'demo@demo.com',
-        created_at: new Date(),
-        updated_at: new Date()
+        password: '$321!pass!123$',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }], {});
   },
 
