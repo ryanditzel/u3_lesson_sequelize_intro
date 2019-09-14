@@ -92,7 +92,7 @@ module.exports = (sequelize, DataTypes) => {
 };
 ```
 
-sequelize/migrations/20190904165246-User.js
+sequelize/migrations/20190914184520-create-user.js
 
 ```js
 'use strict';
@@ -150,8 +150,6 @@ npx sequelize-cli seed:generate --name user
 Let's edit the file sequelize/seeders/20190904165805-user.js
 
 ```js
-'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [{
@@ -191,6 +189,17 @@ Don't forget to create a .gitignore file `touch .gitignore`!
 /node_modules
 .DS_Store
 ```
+
+Finally commit your changes and push it up.
+
+```sh
+git checkout -b setup-sequelize
+git add -A
+git commit -m "setup sequelize"
+git push -u origin setup-sequelize
+```
+
+Done!
 
 ## Resources
 
