@@ -38,7 +38,8 @@ code .
 
 Let's configure our Sequelize project to work with Postgres:
 
-sequelize/config/config.json
+`sequelize/config/config.json`:
+
 ```js
 {
   "development": {
@@ -74,7 +75,7 @@ npx sequelize-cli model:generate --name User --attributes firstName:string,lastN
 
 Below is the User model and an associated migration that will be created from the above command: 
 
-sequelize/models/user.js
+`sequelize/models/user.js`:
 
 ```js
 'use strict';
@@ -92,7 +93,7 @@ module.exports = (sequelize, DataTypes) => {
 };
 ```
 
-sequelize/migrations/20190914184520-create-user.js
+`sequelize/migrations/20190914184520-create-user.js`:
 
 ```js
 'use strict';
@@ -147,7 +148,7 @@ Now let's create a seed file:
 npx sequelize-cli seed:generate --name user
 ```
 
-Let's edit the file sequelize/seeders/20190904165805-user.js
+Let's edit the file `sequelize/seeders/20190904165805-user.js`:
 
 ```js
 module.exports = {
