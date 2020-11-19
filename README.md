@@ -1,4 +1,4 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)  SOFTWARE ENGINEERING IMMERSIVE
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) SOFTWARE ENGINEERING IMMERSIVE
 
 ## Getting started
 
@@ -13,7 +13,7 @@ Sequelize is a JavaScript Object Relational Mapping tool! Its an abstraction lay
 
 ##
 
-> Let's take five minutes and read what an ORM is: 
+> Let's take five minutes and read what an ORM is:
 >
 > - [What is an ORM and why you should use it](https://blog.bitsrc.io/what-is-an-orm-and-why-you-should-use-it-b2b6f75f5e2a)
 
@@ -22,10 +22,9 @@ Sequelize is a JavaScript Object Relational Mapping tool! Its an abstraction lay
 Great, but how do we use Sequelize? Let's start by installing the [Sequelize Client](https://github.com/sequelize/cli):
 
 ```sh
-cd sequelize
+cd Intro-To-Sequelize
 npm init -y
 npm install sequelize pg
-npm install --save-dev sequelize-cli
 ```
 
 Next we will initialize a Sequelize project then open it in VS Code:
@@ -34,13 +33,12 @@ Next we will initialize a Sequelize project then open it in VS Code:
 npx sequelize-cli init
 code .
 ```
+
 > Let's get familiar with all the commands available to us: `npx sequelize-cli --help`
 
-Let's configure our Sequelize project to work with Postgres:
+Let's configure our Sequelize project to work with Postgres, replace your `config.json` with the following:
 
-`sequelize/config/config.json`:
-
-```js
+```json
 {
   "development": {
     "database": "sequelize_development",
@@ -58,7 +56,6 @@ Let's configure our Sequelize project to work with Postgres:
     "dialect": "postgres"
   }
 }
-
 ```
 
 Cool, now create the Postgres database:
@@ -73,30 +70,44 @@ Next we will create a User model:
 npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string,password:string
 ```
 
-Below is the User model and an associated migration that will be created from the above command: 
+Below is the User model and an associated migration that will be created from the above command:
 
 `sequelize/models/user.js`:
 
 ```js
-'use strict';
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-  }, {});
-  User.associate = function(models) {
-    // associations can be defined here
-  };
-  return User;
-};
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  User.init(
+    {
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
+      email: DataTypes.STRING,
+      password: DataTypes.STRING
+    },
+    {
+      sequelize,
+      modelName: 'User'
+    }
+  )
+  return User
+}
 ```
 
 `sequelize/migrations/20190914184520-create-user.js`:
 
 ```js
-'use strict';
+'use strict'
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
@@ -126,12 +137,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Users')
   }
-};
+}
 ```
 
 Now we need to execute our migration which will create the users table in our Postgres database along with columns:
@@ -148,25 +159,31 @@ Now let's create a seed file:
 npx sequelize-cli seed:generate --name user
 ```
 
-Let's edit the file `sequelize/seeders/20190904165805-user.js`:
+Let's edit the file `sequelize/seeders/<some timestamp>-user.js`:
 
 ```js
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Users', [{
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'demo@demo.com',
-        password: '$321!pass!123$',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }], {});
+    return queryInterface.bulkInsert(
+      'Users',
+      [
+        {
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'demo@demo.com',
+          password: '$321!pass!123$',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+      ],
+      {}
+    )
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('Users', null, {})
   }
-};
+}
 ```
 
 Execute the seed file:
@@ -184,21 +201,7 @@ psql sequelize_development
 SELECT * FROM "Users";
 ```
 
-Don't forget to create a .gitignore file `touch .gitignore`!
-
-```sh
-/node_modules
-.DS_Store
-```
-
-Finally commit your changes and push it up.
-
-```sh
-git checkout -b setup-sequelize
-git add -A
-git commit -m "setup sequelize"
-git push -u origin setup-sequelize
-```
+You should see a table with the seeded user. To exit the table press `q` and to exit `psql` type `\q`.
 
 Done!
 
