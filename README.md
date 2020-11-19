@@ -104,7 +104,7 @@ module.exports = (sequelize, DataTypes) => {
 }
 ```
 
-`sequelize/migrations/20190914184520-create-user.js`:
+`sequelize/migrations/<some timestamp>-create-user.js`:
 
 ```js
 'use strict'
