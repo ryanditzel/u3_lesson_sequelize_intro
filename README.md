@@ -19,18 +19,28 @@ Sequelize is a JavaScript Object Relational Mapping tool! Its an abstraction lay
 
 ##
 
+![ORM-Backend-Client](images/client-server-orm.png)
+
+The ORM works as a middleman between our backend server and our database, it handles things such as:
+
+- Finding the request information
+- Querying the database correctly
+- Parsing the retrieved data from the database
+- Returning the data in a readable format
+
 Great, but how do we use Sequelize? Let's start by installing the [Sequelize Client](https://github.com/sequelize/cli):
 
 ```sh
 cd Intro-To-Sequelize
 npm init -y
 npm install sequelize pg
+npm install --save-dev sequelize-cli
 ```
 
 Next we will initialize a Sequelize project then open it in VS Code:
 
 ```sh
-npx sequelize-cli init
+sequelize init
 code .
 ```
 
@@ -61,16 +71,18 @@ Let's configure our Sequelize project to work with Postgres, replace your `confi
 Cool, now create the Postgres database:
 
 ```sh
-npx sequelize-cli db:create
+sequelize db:create
 ```
 
 Next we will create a User model:
 
 ```sh
-npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string,password:string
+sequelize model:generate --name User --attributes firstName:string,lastName:string,email:string,password:string
 ```
 
-Below is the User model and an associated migration that will be created from the above command:
+Below is the User model/table and an associated migration that will be created from the above command:
+
+**NOTE**: Table names should always be lower cased and snake cased, example: `users`
 
 `sequelize/models/user.js`:
 
@@ -98,6 +110,39 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'User'
+    }
+  )
+  return User
+}
+```
+
+Add the following to the `User` model:
+
+```js
+'use strict'
+const { Model } = require('sequelize')
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  User.init(
+    {
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
+      email: DataTypes.STRING,
+      password: DataTypes.STRING
+    },
+    {
+      sequelize,
+      modelName: 'User',
+      tableName: 'users'
     }
   )
   return User
@@ -145,18 +190,60 @@ module.exports = {
 }
 ```
 
-Now we need to execute our migration which will create the users table in our Postgres database along with columns:
+You'll notice our migration is creating a `Users` table, we need to ensure that the table created is the same as what our model's `tableName` is referencing, change `Users` to `users`:
 
-```sh
-npx sequelize-cli db:migrate
+```js
+'use strict'
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('users', {
+      // change the table name here
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      firstName: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING
+      },
+      password: {
+        type: Sequelize.STRING
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    })
+  },
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('users') //Change the table name here
+  }
+}
 ```
 
-> If you made a mistake, you can always rollback: `npx sequelize-cli db:migrate:undo`
+Now we need to execute our migration which will create the `users`table in our Postgres database along with it's corresponding columns:
+
+```sh
+sequelize db:migrate
+```
+
+> If you made a mistake, you can always rollback: `sequelize db:migrate:undo`
 
 Now let's create a seed file:
 
 ```sh
-npx sequelize-cli seed:generate --name user
+sequelize seed:generate --name user
 ```
 
 Let's edit the file `sequelize/seeders/<some timestamp>-user.js`:
@@ -165,7 +252,7 @@ Let's edit the file `sequelize/seeders/<some timestamp>-user.js`:
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      'Users',
+      'users',
       [
         {
           firstName: 'John',
@@ -181,7 +268,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {})
+    return queryInterface.bulkDelete('users', null, {})
   }
 }
 ```
@@ -189,16 +276,16 @@ module.exports = {
 Execute the seed file:
 
 ```sh
-npx sequelize-cli db:seed:all
+sequelize db:seed:all
 ```
 
-> Made a mistake? You can always undo: `npx sequelize-cli db:seed:undo`
+> Made a mistake? You can always undo: `sequelize db:seed:undo`
 
 Drop into psql and query the database for the demo user:
 
 ```sh
 psql sequelize_development
-SELECT * FROM "Users";
+SELECT * FROM users;
 ```
 
 You should see a table with the seeded user. To exit the table press `q` and to exit `psql` type `\q`.
@@ -208,7 +295,3 @@ Done!
 ## Resources
 
 - https://sequelize.org/master/manual/migrations.html
-
-## Feedback
-
-> [Take a minute to give us feedback on this lesson so we can improve it!](https://forms.gle/vgUoXbzxPWf4oPCX6)
