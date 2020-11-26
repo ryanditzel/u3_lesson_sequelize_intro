@@ -23,7 +23,7 @@ Sequelize is a JavaScript Object Relational Mapping tool! Its an abstraction lay
 
 The ORM works as a middleman between our backend server and our database, it handles things such as:
 
-- Finding the request information
+- Finding the requested information
 - Querying the database correctly
 - Parsing the retrieved data from the database
 - Returning the data in a readable format
