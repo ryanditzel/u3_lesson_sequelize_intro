@@ -40,7 +40,7 @@ npm install --save-dev sequelize-cli
 Next we will initialize a Sequelize project then open it in VS Code:
 
 ```sh
-sequelize init
+npx sequelize-cli init
 code .
 ```
 
@@ -71,13 +71,13 @@ Let's configure our Sequelize project to work with Postgres, replace your `confi
 Cool, now create the Postgres database:
 
 ```sh
-sequelize db:create
+npx sequelize-cli db:create
 ```
 
 Next we will create a User model:
 
 ```sh
-sequelize model:generate --name User --attributes firstName:string,lastName:string,email:string,password:string
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string,password:string
 ```
 
 Below is the User model/table and an associated migration that will be created from the above command:
@@ -235,7 +235,7 @@ module.exports = {
 Now we need to execute our migration which will create the `users`table in our Postgres database along with it's corresponding columns:
 
 ```sh
-sequelize db:migrate
+npx sequelize-cli db:migrate
 ```
 
 > If you made a mistake, you can always rollback: `sequelize db:migrate:undo`
@@ -243,7 +243,7 @@ sequelize db:migrate
 Now let's create a seed file:
 
 ```sh
-sequelize seed:generate --name user
+npx sequelize-cli seed:generate --name user
 ```
 
 Let's edit the file `sequelize/seeders/<some timestamp>-user.js`:
@@ -276,7 +276,7 @@ module.exports = {
 Execute the seed file:
 
 ```sh
-sequelize db:seed:all
+npx sequelize-cli db:seed:all
 ```
 
 > Made a mistake? You can always undo: `sequelize db:seed:undo`
