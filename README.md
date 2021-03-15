@@ -4,8 +4,7 @@
 
 ## Getting started
 
-1. Fork
-1. Clone
+- Fork and Clone
 
 ## Sequelize
 
