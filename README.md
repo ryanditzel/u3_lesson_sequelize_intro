@@ -44,7 +44,7 @@ npm install -g sequelize-cli
 Next we will initialize a Sequelize project then open it in VS Code:
 
 ```sh
-npx sequelize init
+sequelize init
 code .
 ```
 
