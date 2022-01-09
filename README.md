@@ -27,6 +27,8 @@ The `ORM` works as a middleman between our backend server and our database, it h
 
 Great, but how do we use Sequelize? Let's start by installing the [Sequelize Client](https://github.com/sequelize/cli):
 
+Like Express and Redux, there is going to be a strict set of orders to follow to get this set up. Once we see the patterns in our actions we will understand why we are doing each step
+
 ```sh
 npm init -y
 npm install sequelize pg
