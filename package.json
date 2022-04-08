@@ -1,0 +1,27 @@
+{
+  "name": "u3_lesson_sequelize_intro",
+  "version": "1.0.0",
+  "description": "![](https://cdn.iconscout.com/icon/free/png-256/sequelize-3-1175091.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanditzel/u3_lesson_sequelize_intro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanditzel/u3_lesson_sequelize_intro/issues"
+  },
+  "homepage": "https://github.com/ryanditzel/u3_lesson_sequelize_intro#readme",
+  "dependencies": {
+    "pg": "^8.7.3",
+    "sequelize": "^6.18.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
+  }
+}
